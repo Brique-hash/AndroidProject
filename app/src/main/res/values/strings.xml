@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Solary</string>
+    <string name="button1">Click</string>
+    <string name="quote">hello</string>
+    <string name="bluetooth">Bluetooth</string>
+    <string name="connection_to">I\'m trying to connect to : %s</string>
+    <string name="scan_over">Scan is over</string>
+    <string name="connected_to">Connected to : %s</string>
+    <string name="not_connected">Not connected</string>
+    <string name="uuid_not_found">Not found uuid</string>
+    <string name="bluetooth_notifications">Bluetooth notifications are enabled</string>
+    <string name="map">Map</string>
+    <string name="setting">Settings</string>
+    <string name="disconnect">disconnection</string>
+    <string name="led">Led</string>
+    <string name="scan">Start the scan</string>
+    <string name="welcome">"Would you dare to come in ?"</string>
+    <string name="enter">Let\'s go</string>
+    <string name="out">I\'m frightened</string>
+    <string name="internet">Internet</string>
+
+
+</resources>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/cardview_light_background"
+    tools:context=".bluetooth.Bluetooth_Activity">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/Recycler_Bluetooth"
+        android:layout_width="648dp"
+        android:layout_height="1013dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:itemCount="10"
+        tools:listitem="@layout/item_bluetooth" />
+
+    <Button
+        android:id="@+id/toggleLed"
+        android:layout_width="99dp"
+        android:layout_height="51dp"
+        android:layout_marginBottom="28dp"
+        android:background="@drawable/shape_button"
+        android:text="@string/led"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.48"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/disconnect" />
+
+    <Button
+        android:id="@+id/startScan"
+        android:layout_width="129dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="28dp"
+        android:background="@drawable/shape_button"
+        android:text="@string/scan"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/toggleLed"
+        app:layout_constraintRight_toLeftOf="@id/disconnect" />
+
+    <Button
+        android:id="@+id/disconnect"
+        android:layout_width="128dp"
+        android:layout_height="49dp"
+        android:layout_marginBottom="28dp"
+        android:background="@drawable/shape_button"
+        android:text="@string/disconnect"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/startScan"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <TextView
+        android:id="@+id/currentConnexion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Connexion à XXXXX"
+        app:layout_constraintBottom_toTopOf="@id/disconnect"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/ledStatus"
+        android:layout_width="295dp"
+        android:layout_height="244dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginBottom="324dp"
+        android:src="@mipmap/kermit_logo_foreground"
+        app:layout_constraintBottom_toTopOf="@id/toggleLed"
+        app:layout_constraintEnd_toEndOf="parent"></ImageView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvDevices"
+        android:layout_width="550dp"
+        android:layout_height="914dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/Recycler_Bluetooth"
+        app:layout_constraintVertical_bias="1.0"
+        tools:ignore="MissingConstraints"
+        tools:itemCount="10"
+        tools:layout_editor_absoluteX="-7dp"
+        tools:listitem="@layout/item_bluetooth" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
