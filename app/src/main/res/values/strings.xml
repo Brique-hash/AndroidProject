@@ -18,6 +18,7 @@
     <string name="enter">Let\'s go</string>
     <string name="out">I\'m frightened</string>
     <string name="internet">Internet</string>
-
+    <string name="noconnection">No access to Internet</string>
+    <string name="nolocalisation">Enable your localisation in settings</string>
 
 </resources>

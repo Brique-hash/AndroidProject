@@ -1,4 +1,4 @@
-package com.example.thegreatapp.data
+package com.example.thegreatapp.data.holder
 
 import android.view.View
 import android.widget.TextView

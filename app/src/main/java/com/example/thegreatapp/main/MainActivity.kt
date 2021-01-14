@@ -2,6 +2,8 @@ package com.example.thegreatapp.main
 
 import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -46,7 +48,15 @@ class MainActivity : AppCompatActivity() {
 
         //Bouton pour accéder au controle par internet
         findViewById<Button>(R.id.internet).setOnClickListener {
-            startActivity(InternetActivity.getStartIntent(this,));
+            val connectivity = this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+            val activeNetwork: NetworkInfo? = connectivity.activeNetworkInfo
+            val isConnected: Boolean = activeNetwork?.isConnectedOrConnecting == true
+
+            if (isConnected){
+                startActivity(Intent(this, InternetActivity::class.java))
+            } else {
+                Toast.makeText(this, getString(R.string.noconnection), Toast.LENGTH_SHORT).show()
+            }
         }
 
         MaterialDialog(this).show {

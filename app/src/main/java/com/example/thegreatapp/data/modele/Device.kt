@@ -1,4 +1,4 @@
-package com.example.thegreatapp.data
+package com.example.thegreatapp.data.modele
 
 import android.bluetooth.BluetoothDevice
     // Représente les données

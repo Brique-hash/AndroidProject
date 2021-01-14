@@ -22,11 +22,11 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.recyclical.datasource.emptyDataSourceTyped
 import com.afollestad.recyclical.setup
 import com.afollestad.recyclical.withItem
-import com.example.thegreatapp.data.BluetoothLEManager
-import com.example.thegreatapp.data.DeviceViewHolder
-import com.example.thegreatapp.data.Device
+import com.example.thegreatapp.data.manager.BluetoothLEManager
+import com.example.thegreatapp.data.holder.DeviceViewHolder
+import com.example.thegreatapp.data.modele.Device
 import com.example.thegreatapp.R
-import com.example.thegreatapp.data.LocalPreferences
+import com.example.thegreatapp.data.local.LocalPreferences
 import kotlinx.android.synthetic.main.activity_bluetooth.*
 
 class Bluetooth_Activity : AppCompatActivity() {
@@ -55,8 +55,7 @@ class Bluetooth_Activity : AppCompatActivity() {
     /**Gestion du SCAN, recherche des device BLE à proximité*/
 
     // Parametrage du scan BLE
-    private val scanSettings =
-            ScanSettings.Builder().setScanMode(ScanSettings.SCAN_MODE_LOW_LATENCY).build()
+    private val scanSettings = ScanSettings.Builder().setScanMode(ScanSettings.SCAN_MODE_LOW_LATENCY).build()
 
     // On ne retourne que les « Devices » proposant le bon UUID
     private var scanFilters: List<ScanFilter> = arrayListOf(
@@ -80,8 +79,7 @@ class Bluetooth_Activity : AppCompatActivity() {
         Recycler_Bluetooth.setup {
             withDataSource(bleDevicesFoundList)
             withItem<Device, DeviceViewHolder>(R.layout.item_bluetooth) {
-                onBind(::DeviceViewHolder) { _, item ->
-                    name.text = (item.name.takeIf { !it.isNullOrEmpty() } ?: run { item.mac })
+                onBind(::DeviceViewHolder) { _, item -> name.text = (item.name.takeIf { !it.isNullOrEmpty() } ?: run { item.mac })
                 }
                 onClick {
                     Toast.makeText(this@Bluetooth_Activity, getString(R.string.connection_to, item.name), Toast.LENGTH_SHORT).show()
@@ -111,11 +109,7 @@ class Bluetooth_Activity : AppCompatActivity() {
     /* Gère l'action après la demande de permission. 2 cas possibles :
      * - Réussite 🎉.
      * - Échec (refus utilisateur).*/
-    override fun onRequestPermissionsResult(
-            requestCode: Int,
-            permissions: Array<out String>,
-            grantResults: IntArray
-    ) {
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         if (requestCode == PERMISSION_REQUEST_LOCATION && grantResults.size == 1) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED && locationServiceEnabled()) {
                 // Permission OK => Lancer SCAN
@@ -123,44 +117,20 @@ class Bluetooth_Activity : AppCompatActivity() {
             } else if (!locationServiceEnabled()) {
                 // Inviter à activer la localisation
                 startActivity(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS))
+                //Sinon toast pour dire que cela ne fonctionne pas
             } else {
-                // Permission KO => Gérer le cas.
-                // Vous devez ici modifier le code pour gérer le cas d'erreur (permission refusé)
-                // Avec par exemple une Dialog
-
-                MaterialDialog(this).show {
-                    title(text = "Permission denied")
-                    message(text = "") {
-                        html() // format, color, etc. with tags in string
-                        html { link ->  // same as above, but...
-                            // Invokes a callback when a URL is clicked instead of auto opening it in a browser
-                        }
-                        lineSpacing(2.0f)
-
-                    }
-
-                    positiveButton(text = "Ok") { dialog ->
-                        // Finish app
-                        finish()
+                Toast.makeText(this@Bluetooth_Activity, getString(R.string.nolocalisation), Toast.LENGTH_SHORT).show()
+                finish()
                     }
                 }
             }
-        }
-    }
 
-    /**
-     * Permet de vérifier si l'application possede la permission « Localisation ». OBLIGATOIRE pour scanner en BLE
-     */
+    /*Permet de vérifier si l'application possede la permission « Localisation ». OBLIGATOIRE pour scanner en BLE*/
     private fun hasPermission(): Boolean {
-        return ContextCompat.checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_FINE_LOCATION
-        ) == PackageManager.PERMISSION_GRANTED
+        return ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
     }
 
-    /**
-     * Demande de la permission (ou des permissions) à l'utilisateur.
-     */
+    /*Demande de la permission (ou des permissions) à l'utilisateur.*/
     private fun askForPermission() {
         ActivityCompat.requestPermissions(
                 this,

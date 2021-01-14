@@ -1,4 +1,4 @@
-package com.example.thegreatapp.data
+package com.example.thegreatapp.data.manager
 
 import android.bluetooth.*
 import java.util.*

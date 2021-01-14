@@ -1,6 +1,7 @@
 package com.example.thegreatapp.data
 
 import com.example.thegreatapp.BuildConfig
+import com.example.thegreatapp.data.modele.LedStatus
 import com.google.gson.GsonBuilder
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -22,15 +23,11 @@ interface ApiService {
     suspend fun writeStatus(@Body status: LedStatus): LedStatus
 
     companion object {
-        /**
-         * Création d'un singleton pour la simplicité, mais normalement nous utilisons plutôt un
-         * injecteur de dépendances.
-         */
+        /*Création d'un singleton pour la simplicité, mais normalement nous utilisons plutôt un
+         injecteur de dépendances*/
         val instance = build()
 
-        /**
-         * Création de l'objet qui nous permettra de faire les appels d'API
-         */
+        //Création de l'objet qui nous permettra de faire les appels d'API
         private fun build(): ApiService {
             val gson = GsonBuilder().create() // JSON deserializer/serializer
 

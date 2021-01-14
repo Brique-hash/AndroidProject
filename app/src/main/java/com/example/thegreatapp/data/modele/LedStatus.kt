@@ -1,9 +1,6 @@
-package com.example.thegreatapp.data
+package com.example.thegreatapp.data.modele
 
-class LedStatus {
-    /**
-     * LedStatus model
-     */
+    /*LedStatus model*/
     data class LedStatus(var identifier: String = "", var status: Boolean = false) {
         fun setIdentifier(identifier: String): LedStatus {
             this.identifier = identifier
@@ -23,4 +20,3 @@ class LedStatus {
             return LedStatus(identifier, status)
         }
     }
-}

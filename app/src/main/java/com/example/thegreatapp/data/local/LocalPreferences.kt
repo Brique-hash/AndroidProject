@@ -1,4 +1,4 @@
-package com.example.thegreatapp.data
+package com.example.thegreatapp.data.local
 
 import android.content.Context
 import android.content.SharedPreferences
