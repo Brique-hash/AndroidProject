@@ -20,5 +20,6 @@
     <string name="internet">Internet</string>
     <string name="noconnection">No access to Internet</string>
     <string name="nolocalisation">Enable your localisation in settings</string>
+    <string name="Name">Property of Brieuc COIGNARD</string>
 
 </resources>
